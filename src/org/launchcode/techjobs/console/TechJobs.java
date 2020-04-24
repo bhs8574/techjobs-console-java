@@ -2,6 +2,7 @@ package org.launchcode.techjobs.console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -61,7 +62,7 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -111,6 +112,26 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+
+        //First use a for each loop to access every HashMap in someJobs
+        for (HashMap<String, String> map : someJobs) {
+
+            //Beginning of a divider for easier reading.
+            System.out.println("*****");
+
+            //For the current HashMap, loop through the keys and print each key and each associated value.
+            for (Map.Entry<String, String> job : map.entrySet()) {
+
+                System.out.println(job.getKey() + ": " + job.getValue());
+            }
+            //Puts a divider after every entry for easier reading.
+            System.out.println("*****"+"\n");
+        }
+
+        if (someJobs.isEmpty()) {
+            System.out.println("Sorry, there are no results for your query at this time!");
+        }
+
+        //System.out.println("printJobs is not implemented yet");
     }
 }
